@@ -37,25 +37,22 @@ export class GameComponent {
       setTimeout(() => {
         this.game.cardsOutOfGame.push(this.currentCard);
         this.pickCardAnimation = false;
-        if(this.game.currentPlayer + 1 < this.game.players.length) {
-          this.game.currentPlayer++;
-        } else {
-          this.game.currentPlayer = 0;
-        }
+
+        this.game.currentPlayer++;
+        this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
 
       }, 1000);
     }
   }
 
 
-  
-
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe(name => {
-      this.game.players.push(name);
-      console.log(this.game.players);
+      if (name && name.length > 0) {
+        this.game.players.push(name);
+      }
     });
   }
 
