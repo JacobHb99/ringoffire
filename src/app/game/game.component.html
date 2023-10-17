@@ -3,22 +3,22 @@
 [ngStyle]="{'top.px': 30 + (i * 80)}" [name]="player" ></app-player>
 
 
-<div class="playGround">
+<div class="playGround" style="background-image: url('assets/img/backgrounds/background_wood.jpg');">
     <div class="cardStack">
         <!-- Stack for played Cards -->
-        <img *ngFor="let card of game.cardsOutOfGame" class="playedCard" src="/assets/img/cards/{{ card }}.png" alt="">
+        <img *ngFor="let card of game.cardsOutOfGame" class="playedCard" src="assets/img/cards/{{ card }}.png" alt="">
 
         <!-- Card stack -->
         <img *ngFor="let c of [0, 1, 2, 3]; let i = index" [ngStyle]="{'right.px': i * 3}"
-        src="/assets/img/cards/card_cover.png" alt="">
+        src="assets/img/cards/card_cover.png" alt="">
         
         <!-- Top card on stack -->
         <img (click)="takeNewCard()" class="topCard" style="right: 12px" 
-        src="/assets/img/cards/card_cover.png" alt="">
+        src="assets/img/cards/card_cover.png" alt="">
 
         <!-- Current card animation -->
         <img (click)="takeNewCard()" *ngIf="pickCardAnimation" class="pickCard" style="right: 22px" 
-        src="/assets/img/cards/{{ currentCard }}.png" alt="">
+        src="assets/img/cards/{{ currentCard }}.png" alt="">
 
     </div>
 
