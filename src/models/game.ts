@@ -1,8 +1,13 @@
 export class Game {
+    [x: string]: any;
     public players: string[] = [];
     public stack: string[] = [];
     public cardsOutOfGame: string[] = [];
     public currentPlayer: number = 0;
+    public currentCard: string;
+    public gameId: string;
+    public pickCardAnimation: boolean = false;;
+
 
     constructor() {
         for (let i = 1; i < 14; i++) {

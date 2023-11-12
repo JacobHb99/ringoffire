@@ -16,10 +16,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { GaameDescriptionComponent } from './gaame-description/gaame-description.component';
 import {MatCardModule} from '@angular/material/card';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-
-
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -41,17 +40,13 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
     FormsModule,
     MatCardModule,
     BrowserAnimationsModule,
-    provideFirebaseApp(() => initializeApp({
-      "projectId":"ring-of-fire-307e7",
-      "appId":"1:856287629858:web:dd9f8a5ae96ce9ae60307b",
-      "storageBucket":"ring-of-fire-307e7.appspot.com",
-      "apiKey":"AIzaSyCMGLxovEZioqazbIRD9iZU9hMhrrR6Yq8",
-      "authDomain":"ring-of-fire-307e7.firebaseapp.com",
-      "messagingSenderId":"856287629858"})),
-      
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]
+  
 })
-export class AppModule { }
+export class AppModule { 
+  
+}
