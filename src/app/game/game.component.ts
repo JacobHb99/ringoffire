@@ -19,7 +19,7 @@ export class GameComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
   games$!: Observable<any[]>;
   currentCard: string = '';
-  currentGameId: string = '';
+  currentGameId: string = 'IjMEYN4ki8ls22xZzknS';
   unsubGames;
 
 
@@ -27,14 +27,15 @@ export class GameComponent implements OnInit {
     
     const coll = this.getGameRef();
     console.log("coll", coll);
+    this.subGame();
 
   }
 
 
   newGame() {
     this.game = new Game();
-    this.addGame();
-    console.log("game", this.game);
+  
+    console.log(this.game);
     console.log("firestore", this.firestore);
     console.log("getGameRef", this.getGameRef());
     console.log("route", this.route);
@@ -44,7 +45,6 @@ export class GameComponent implements OnInit {
   ngOnInit(): void {
     this.newGame();
     this.getGameId();
-    this.subGame();
 
     console.log("id", this.currentGameId);
   }
@@ -52,7 +52,7 @@ export class GameComponent implements OnInit {
 
   subGame() {
     if(this.firestore){
-      this.unsubGames = onSnapshot(this.getSingleRef("games", "IjMEYN4ki8ls22xZzknS"), (doc:any) => {
+      this.unsubGames = onSnapshot(this.getSingleRef("games", this.currentGameId), (doc:any) => {
       this.game.currentPlayer = doc.data().currentPlayer; 
       this.game.cardsOutOfGame = doc.data().playedCards; 
       this.game.players = doc.data().players; 
@@ -66,8 +66,9 @@ export class GameComponent implements OnInit {
 
 
   getGameId() {
-    this.route.params.subscribe((param) => {
-      this.currentGameId = param['id'];
+    this.route.params.subscribe((params) => {
+      console.log(params);
+      this.currentGameId = params['id'];
     }); 
   }
 
@@ -84,7 +85,7 @@ export class GameComponent implements OnInit {
 
   async updateGame() {
     if (this.game.gameId) {
-      await updateDoc(this.getSingleRef('games', "IjMEYN4ki8ls22xZzknS"), this.game.toJSON());
+      await updateDoc(this.getSingleRef('games', this.currentGameId), this.game.toJSON());
     }
   }
 
@@ -101,7 +102,7 @@ export class GameComponent implements OnInit {
 
 
   takeNewCard() {
-    if (!this.game.pickCardAnimation && this.game.stack.length > 0 && this.game.players.length > 0) {
+    if (!this.game.pickCardAnimation) {
       this.currentCard = this.game.stack.pop();
       this.game.pickCardAnimation = true;
   
