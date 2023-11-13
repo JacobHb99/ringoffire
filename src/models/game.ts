@@ -4,8 +4,8 @@ export class Game {
     public stack: string[] = [];
     public cardsOutOfGame: string[] = [];
     public currentPlayer: number = 0;
-    public currentCard: string;
-    public gameId: string;
+    public currentCard: string = "";
+    public gameId: string = "";
     public pickCardAnimation: boolean = false;;
 
 
@@ -22,13 +22,12 @@ export class Game {
     }
     public toJSON() {
         return {
-            players:  this.players,
+            players: this.players,
             stack: this.stack,
-            cardsOutOfGame: this.cardsOutOfGame,
+            playedCards: this.cardsOutOfGame,
             currentPlayer: this.currentPlayer,
-            currentCard: this.currentCard,
-            pickCardAnimation: this.pickCardAnimation,
-            gameId: this.gameId
+            pickCardAnimation: this.pickCardAnimation, 
+            currentCard: this.currentCard
         };
     }
 }

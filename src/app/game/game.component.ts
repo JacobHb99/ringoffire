@@ -19,7 +19,7 @@ export class GameComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
   games$!: Observable<any[]>;
   currentCard: string = '';
-  currentGameId: string = 'IjMEYN4ki8ls22xZzknS';
+  currentGameId: string = '';
   unsubGames;
 
 
@@ -74,12 +74,7 @@ export class GameComponent implements OnInit {
 
 
   async addGame() {
-    let gameInfo = await addDoc(this.getGameRef(), this.game.toJSON()).catch(((err) => {
-      console.error(err);
-    })).then((docRef) => {
-      console.log('document written with ID:');
-    })
-    console.log(gameInfo);
+    
   }
 
 
