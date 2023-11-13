@@ -17,8 +17,24 @@ export class Game {
             this.stack.push('hearts_' + i);
         }
         shuffle(this.stack);
+
+
+    }
+    public toJSON() {
+        return {
+            players:  this.players,
+            stack: this.stack,
+            cardsOutOfGame: this.cardsOutOfGame,
+            currentPlayer: this.currentPlayer,
+            currentCard: this.currentCard,
+            pickCardAnimation: this.pickCardAnimation,
+            gameId: this.gameId
+        };
     }
 }
+
+
+
 
 
 function shuffle(array) {
